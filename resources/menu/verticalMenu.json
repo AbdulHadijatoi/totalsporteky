@@ -1,0 +1,120 @@
+{
+  "menu": [
+    {
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "dashboard",
+      "badge": [
+        "primary",
+        "1"
+      ],
+      "submenu": [
+        {
+          "url": "/",
+          "name": "Analytics",
+          "slug": "dashboard-analytics"
+        }
+     
+      ]
+    },
+   
+   
+    {
+      "name": "Roles & Permissions",
+      "icon": "menu-icon tf-icons ti ti-settings",
+      "slug": "app-access",
+      "submenu": [
+        {
+          "url": "/app/access-roles",
+          "name": "Roles",
+          "slug": "app-access-roles"
+        },
+        {
+          "url": "/app/access-permission",
+          "name": "Permission",
+          "slug": "app-access-permission"
+        }
+      ]
+    },
+   
+    {
+      "menuHeader": "MENU"
+    },
+    {
+      "name": "Leagues",
+      "icon": "menu-icon tf-icons ti ti-toggle-left",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "add/leagues",
+          "name": "Add League",
+          "slug": "add-leagues"
+        },
+          {
+            "url": "list/leagues",
+            "name": "List of League",
+            "slug": "list-leagues"
+          }
+        ]
+       
+      
+      },
+      {
+        "name": "Matches",
+        "icon": "menu-icon tf-icons ti ti-toggle-left",
+        "slug": "",
+        "submenu": [
+          {
+            "url": "add/matches",
+            "name": "Add Matches",
+            "slug": "add-matches"
+          },
+            {
+              "url": "list/matches",
+              "name": "List of Matches",
+              "slug": "list-matches"
+            }
+          ]
+         
+        
+        },
+        {
+          "name": "Teams",
+          "icon": "menu-icon tf-icons ti ti-toggle-left",
+          "slug": "",
+          "submenu": [
+            {
+              "url": "add/teams",
+              "name": "Add Teams",
+              "slug": "add-teams"
+            },
+              {
+                "url": "list/teams",
+                "name": "List of Teams",
+                "slug": "list-teams"
+              }
+            ]
+           
+          
+          },
+          {
+            "name": "Blogs",
+            "icon": "menu-icon tf-icons ti ti-toggle-left",
+            "slug": "",
+            "submenu": [
+              {
+                "url": "add/blogs",
+                "name": "Add Blogs",
+                "slug": "add-blogs"
+              },
+                {
+                  "url": "list/blogs",
+                  "name": "List of Blogs",
+                  "slug": "list-blogs"
+                }
+              ]
+             
+            
+            }
+    ]
+  }

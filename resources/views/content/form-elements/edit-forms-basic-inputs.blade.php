@@ -50,7 +50,7 @@
         <div class="mb-3 row">
           <label for="html5-time-input" class="col-md-2 col-form-label">Uploaded Picture</label>
           <div class="col-md-10">
-        <img src="{{ asset('storage/' . $findleagues->image) }}" style="width: 300px; height: auto; object-fit: cover;" alt="Uploaded Image">
+        <img src="{{ Storage::url('' . $findleagues->image) }}" style="width: 300px; height: auto; object-fit: cover;" alt="Uploaded Image">
 
           </div>
         </div>
@@ -59,8 +59,26 @@
           <div class="col-md-10">
             <input class="form-control" type="file"  name="image"  />
           </div>
-  
        </div>
+
+       <div class="m-0 px-4 pb-3 d-block template-customizer-layoutType">
+        <label for="customizerStyle" class="form-label d-block template-customizer-t-layout_label">Status</label>
+        <div class="row row-cols-lg-auto g-3 align-items-center template-customizer-layouts-options">
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="status" id="layoutRadios-static" value="1" {{ $findleagues->status === 1 ? 'checked' : '' }}>
+              <label class="form-check-label template-customizer-t-layout_static" for="layoutRadios-static">Active</label>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="status" id="layoutRadios-fixed" value="0" {{ $findleagues->status != 1 ? 'checked' : '' }}>
+              <label class="form-check-label template-customizer-t-layout_fixed" for="layoutRadios-fixed">Inactive</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
         <button type="submit" class="btn btn-primary">UPDATE</button>
        
       </div>

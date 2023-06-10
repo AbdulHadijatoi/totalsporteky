@@ -12,8 +12,9 @@ class TeamController extends Controller
 {
     public function index()
     {
-        $allleagues = League::all();
-      return view('content.form-elements.team',compact('allleagues'));
+      $leagues = League::where('created_by',auth()->id())->get();
+        $teams = Team::where('created_by',auth()->id())->get();
+        return view('content.form-elements.team',compact('teams','leagues'));
     }
   public function save(Request $request)
   {
@@ -23,12 +24,13 @@ class TeamController extends Controller
       $imageName = time() . '_' . $newImage->getClientOriginalName();
   
       $newImage->storeAs('public/team', $imageName);
-  }
+    }
   
-    $league = Team::create([
+    $team = Team::create([
         'name' => $data['name'],
         'country_name' => $data['country_name'],
         'league_id' => $data['league_id'],
+        'created_by' => auth()->id(),
         'image'=> $imageName,
 
     ]);
@@ -38,15 +40,31 @@ class TeamController extends Controller
   }
   public function list()
   {
-    $allleagues = Team::with('league')->get();
+    $teams = Team::with('league')->where('created_by',auth()->id())->get();
 
-    return view('content.tables.team-index',compact('allleagues'));
+    return view('content.tables.team-index',compact('teams'));
   }
+
   public function delete($id)
   {
-    $findleagues = Team::find($id);
-    $findleagues->delete();
-    return back();
+    if (auth()->user()->role != "super-admin") {
+        $accessConditions = [
+            ["id", "=", $id],
+            ["created_by", "=", auth()->id()],
+        ];
+    } else {
+        $accessConditions = [["id", "=", $id]];
+    }
+
+    $team = Team::where($accessConditions)->first();
+    if (!$team) {
+        return abort(402, "You don't have access to this resource");
+    }
+    
+    $team->delete();
+    
+    // return back();
+    return redirect()->route('list-team');
 
 
   }
@@ -68,14 +86,27 @@ class TeamController extends Controller
       }
       // dd('here');
   
-        $league = Team::find($id);
+      if (auth()->user()->role != "super-admin") {
+          $accessConditions = [
+              ["id", "=", $id],
+              ["created_by", "=", auth()->id()],
+          ];
+      } else {
+          $accessConditions = [["id", "=", $id]];
+      }
+
+      $team = Team::where($accessConditions)->first();
+      if (!$team) {
+          return abort(402, "You don't have access to this resource");
+      }
         // dd($league);
 
-        $league->update([
+        $team->update([
           'name' => $data['name'],
           'country_name' => $data['country_name'],
           'league_id' => $data['league_id'],
-          'image' => isset($imageName) ? $imageName : $league->image,
+          'status' => $data['status'],
+          'image' => isset($imageName) ? $imageName : $team->image,
         ]);
     
         return redirect()->route('list-team');
@@ -83,11 +114,23 @@ class TeamController extends Controller
     }
   public function edit($id)
   {
-    $allleagues = League::all();
+    $leagues = League::where('created_by',auth()->id())->get();
 
-    $findleagues = Team::with('league')->find($id);
+    if (auth()->user()->role != "super-admin") {
+        $accessConditions = [
+            ["id", "=", $id],
+            ["created_by", "=", auth()->id()],
+        ];
+    } else {
+        $accessConditions = [["id", "=", $id]];
+    }
 
-    return view('content.form-elements.edit_team',compact('findleagues','allleagues'));
+    $team = Team::with('league')->where($accessConditions)->first();
+    if (!$team) {
+        return abort(402, "You don't have access to this resource");
+    }
+
+    return view('content.form-elements.edit_team',compact('team','leagues'));
 
   }
 }

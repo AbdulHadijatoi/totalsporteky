@@ -20,12 +20,13 @@
           <th>Name</th>
           <th>League</th>
           <th>Country Name</th>
+          <th>Status</th>
           <th>Action</th>
 
         </tr>
       </thead>
       <tbody class="table-border-bottom-0">
-        @foreach ($allleagues as $key=> $item)
+        @foreach ($teams as $key=> $item)
         <tr>
           <td>{{ $key +1 }}</td>
           <td>{{ isset($item->league) ? $item->league->name : null }}</td>
@@ -33,6 +34,13 @@
           <td>{{ $item->name }}
           </td>
           <td>{{ $item->country_name }}</td>
+          <td>
+            @if($item->status == 1)
+              <span class="badge bg-label-success">Active</span>
+            @else
+              <span class="badge bg-label-danger">Inactive</span>
+            @endif
+          </td>
           <td>
             <div class="dropdown">
               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>

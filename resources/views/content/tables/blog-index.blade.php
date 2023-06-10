@@ -19,6 +19,7 @@
           <th>#</th>
           <th>Title</th>
           <th>Decription</th>
+          <th>Status</th>
           <th>Action</th>
 
         </tr>
@@ -32,6 +33,13 @@
           </td>
           <td>{{ Str::limit($item->description, 50) }}</td>
 
+          <td>
+            @if($item->status == 1)
+              <span class="badge bg-label-success">Active</span>
+            @else
+              <span class="badge bg-label-danger">Inactive</span>
+            @endif
+          </td>
           <td>
             <div class="dropdown">
               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>

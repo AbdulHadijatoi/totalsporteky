@@ -27,10 +27,11 @@
 
           <select class="select2 form-select form-select-lg" name="league_id" required id="html5-text-input" required data-allow-clear="true">
             <option value="">Select League</option>
-            @foreach ($allleagues as $league )
-            <option value="{{ $league->id }}">{{ $league->name }}</option>
-            @endforeach
-           
+            @if($leagues)
+              @foreach ($leagues as $league)
+                <option value="{{ $league->id }}">{{ $league->name }}</option>
+              @endforeach
+           @endif
            
           </select>
         </div>

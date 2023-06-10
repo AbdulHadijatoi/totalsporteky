@@ -21,6 +21,8 @@
           <th>Location</th>
           <th>Date</th>
           <th>Time</th>
+          <th>Created By</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -33,6 +35,14 @@
           </td>
           <td>{{ $item->date_of_match }}</td>
           <td>{{ $item->start_time }}</td>
+          <td>{{ $item->creator&&$item->creator->name?$item->creator->name:'-' }}</td>
+          <td>
+            @if($item->status == 1)
+              <span class="badge bg-label-success">Active</span>
+            @else
+              <span class="badge bg-label-danger">Inactive</span>
+            @endif
+          </td>
           <td>
             <div class="dropdown">
               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>

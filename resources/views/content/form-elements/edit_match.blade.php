@@ -13,7 +13,7 @@
 
 <div class="row">
   
-  <form action="{{ route('update-matches',$findleagues->id) }}" method="POST">
+  <form action="{{ route('update-matches',$match->id) }}" method="POST">
     @csrf
     <div class="col-xl-8">
       <!-- HTML5 Inputs -->
@@ -26,9 +26,9 @@
             <div class="col-md-10">
   
             <select class="select2 form-select form-select-lg" name="league_id" required id="html5-text-input" required data-allow-clear="true">
-              <option value="{{ $findleagues->league->id }}">{{ $findleagues->league->name }}</option>
+              <option value="{{ $match->league->id }}">{{ $match->league->name }}</option>
 
-              @foreach ($allleagues as $league )
+              @foreach ($leagues as $league )
               <option value="{{ $league->id }}">{{ $league->name }}</option>
               @endforeach
              
@@ -42,8 +42,8 @@
           <div class="col-md-10">
   
           <select class="select2 form-select form-select-lg" name="home_team" required id="html5-text-input" required data-allow-clear="true">
-            <option value="{{ $findleagues->home_team }}"> @php
-              $awayTeam = $team->firstWhere('id', $findleagues->home_team);
+            <option value="{{ $match->home_team }}"> @php
+              $awayTeam = $team->firstWhere('id', $match->home_team);
               if ($awayTeam) {
                   echo $awayTeam->name;
               } else {
@@ -64,8 +64,8 @@
           <div class="col-md-10">
   
           <select class="select2 form-select form-select-lg" name="away_team" required id="html5-text-input" required data-allow-clear="true">
-            <option value="{{ $findleagues->away_team }}"> @php
-              $awayTeam = $team->firstWhere('id', $findleagues->away_team);
+            <option value="{{ $match->away_team }}"> @php
+              $awayTeam = $team->firstWhere('id', $match->away_team);
               if ($awayTeam) {
                   echo $awayTeam->name;
               } else {
@@ -85,13 +85,13 @@
           <div class="mb-3 row">
             <label for="html5-time-input" class="col-md-2 col-form-label">Time</label>
             <div class="col-md-10">
-              <input class="form-control" type="time" name="start_time" value="{{ $findleagues->start_time }}"  required id="html5-time-input" />
+              <input class="form-control" type="time" name="start_time" value="{{ $match->start_time }}"  required id="html5-time-input" />
             </div>
           </div>
           <div class="mb-3 row">
             <label for="html5-date-input" class="col-md-2 col-form-label">Date</label>
             <div class="col-md-10">
-              <input class="form-control" type="date" name="date_of_match" value="{{ $findleagues->date_of_match }}" id="html5-date-input" />
+              <input class="form-control" type="date" name="date_of_match" value="{{ $match->date_of_match }}" id="html5-date-input" />
             </div>
           </div>
            @foreach ($streamUrls as $item)
@@ -103,6 +103,24 @@
               </div>
             </div>
            @endforeach
+
+           <div class="m-0 px-4 pb-3 d-block template-customizer-layoutType">
+            <label for="customizerStyle" class="form-label d-block template-customizer-t-layout_label">Status</label>
+            <div class="row row-cols-lg-auto g-3 align-items-center template-customizer-layouts-options">
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="status" id="layoutRadios-static" value="1" {{ $match->status === 1 ? 'checked' : '' }}>
+                  <label class="form-check-label template-customizer-t-layout_static" for="layoutRadios-static">Active</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="status" id="layoutRadios-fixed" value="0" {{ $match->status != 1 ? 'checked' : '' }}>
+                  <label class="form-check-label template-customizer-t-layout_fixed" for="layoutRadios-fixed">Inactive</label>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <button type="submit" class="btn btn-primary">Update</button>
          

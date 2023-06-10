@@ -67,6 +67,7 @@ class BlogController extends Controller
     $league->update([
       'title' => $data['title'],
       'description' => $data['description'],
+      'status' => $data['status'],
       'image' => isset($imageName) ? $imageName : $league->image,
     ]);
 

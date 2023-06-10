@@ -27,7 +27,7 @@
 
           <select class="select2 form-select form-select-lg" name="league_id" required id="html5-text-input" required data-allow-clear="true">
             <option value="">Select League</option>
-            @foreach ($allleagues as $league )
+            @foreach ($leagues as $league )
             <option value="{{ $league->id }}">{{ $league->name }}</option>
             @endforeach
            
@@ -41,8 +41,8 @@
 
         <select class="select2 form-select form-select-lg" name="home_team" required id="html5-text-input" required data-allow-clear="true">
           <option value="">Select home team</option>
-          @foreach ($teams as $league )
-          <option value="{{ $league->id }}">{{ $league->name }}</option>
+          @foreach ($teams as $match )
+          <option value="{{ $match->id }}">{{ $match->name }}</option>
           @endforeach
          
          
@@ -56,8 +56,8 @@
 
         <select class="select2 form-select form-select-lg" name="away_team" required id="html5-text-input" required data-allow-clear="true">
           <option value="">Select away team</option>
-          @foreach ($teams as $league )
-          <option value="{{ $league->id }}">{{ $league->name }}</option>
+          @foreach ($teams as $match )
+          <option value="{{ $match->id }}">{{ $match->name }}</option>
           @endforeach
          
          

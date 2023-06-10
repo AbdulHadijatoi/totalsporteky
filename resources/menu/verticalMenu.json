@@ -18,6 +18,7 @@
       ]
     },
    
+    
    
     {
       "name": "Roles & Permissions",
@@ -39,6 +40,23 @@
    
     {
       "menuHeader": "MENU"
+    },
+    {
+      "name": "Users",
+      "slug": "app-user",
+      "icon": "menu-icon tf-icons ti ti-toggle-left",
+      "submenu": [
+        {
+          "url": "add/user",
+          "name": "Add User",
+          "slug": "add-user"
+        },
+        {
+          "url": "list/users",
+          "name": "List of Users",
+          "slug": "list-users"
+        }
+      ]
     },
     {
       "name": "Leagues",

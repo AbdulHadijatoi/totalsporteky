@@ -67,26 +67,26 @@ $configData = Helper::appClasses();
   
     @auth
     @if(auth()->user()->role == 'admin')
-    @if(isset($menu->name) && ($menu->name == 'Dashboards' || $menu->name == 'Matches' || $menu->name == 'Teams' || $menu->name == 'Blogs'))
-        <li class="menu-item {{$activeClass}}">
-            <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0);' }}" class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}" @if (isset($menu->target) and !empty($menu->target)) target="_blank" @endif>
-                @isset($menu->icon)
-                <i class="{{ $menu->icon }}"></i>
-                @endisset
-                <div>{{ isset($menu->name) ? __($menu->name) : '' }}</div>
-                @isset($menu->badge)
-                <div class="badge bg-label-{{ $menu->badge[0] }} rounded-pill ms-auto">{{ $menu->badge[1] }}</div>
-                @endisset
-            </a>
+      @if(isset($menu->name) && ($menu->name == 'Dashboards' || $menu->name == 'Matches' || $menu->name == 'Teams' || $menu->name == 'Leagues'))
+          <li class="menu-item {{$activeClass}}">
+              <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0);' }}" class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}" @if (isset($menu->target) and !empty($menu->target)) target="_blank" @endif>
+                  @isset($menu->icon)
+                  <i class="{{ $menu->icon }}"></i>
+                  @endisset
+                  <div>{{ isset($menu->name) ? __($menu->name) : '' }}</div>
+                  @isset($menu->badge)
+                  <div class="badge bg-label-{{ $menu->badge[0] }} rounded-pill ms-auto">{{ $menu->badge[1] }}</div>
+                  @endisset
+              </a>
 
-            {{-- submenu --}}
-            @isset($menu->submenu)
-            @include('layouts.sections.menu.submenu',['menu' => $menu->submenu])
-            @endisset
-        </li>
-    @endif
-@elseif(auth()->user()->role == 'super-admin')
-    @if(isset($menu->name) && ($menu->name == 'Dashboards' || $menu->name == 'Leagues'))
+              {{-- submenu --}}
+              @isset($menu->submenu)
+              @include('layouts.sections.menu.submenu',['menu' => $menu->submenu])
+              @endisset
+          </li>
+      @endif
+  @elseif(auth()->user()->role == 'super-admin')
+    @if(isset($menu->name) && ($menu->name == 'Dashboards' || $menu->name == 'Users' || $menu->name == 'Leagues' || $menu->name == 'Matches' || $menu->name == 'Blogs'))
         <li class="menu-item {{$activeClass}}">
             <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0);' }}" class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}" @if (isset($menu->target) and !empty($menu->target)) target="_blank" @endif>
                 @isset($menu->icon)

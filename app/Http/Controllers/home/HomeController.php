@@ -22,7 +22,7 @@ class HomeController extends Controller
                   ->join('teams AS away', 'matches.away_team', '=', 'away.id')
                   ->select('matches.*', 'home.name AS home_team_name', 'away.name AS away_team_name');
           },
-      ])->get();
+      ])->where('status',1)->get();
   }
   public function index()
   {
@@ -69,7 +69,7 @@ class HomeController extends Controller
   {
     $allleagues = $this->allleagues;
     $setvar = '3sg5et';
-    $getblogs = Blog::all();
+    $getblogs = Blog::where('status',1)->get();
     // dd($getblogs);
     return view('blog', compact('getblogs','allleagues','setvar'));
 

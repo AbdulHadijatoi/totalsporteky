@@ -14,4 +14,9 @@ class Team extends Model
         return $this->belongsTo(League::class, 'league_id');
     }
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
 }

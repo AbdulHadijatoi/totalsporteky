@@ -13,4 +13,19 @@ class League extends Model
     {
         return $this->hasMany(Matches::class, 'league_id');
     }
+
+    public function teams()
+    {
+        return $this->hasMany(Team::class);
+    }
+    
+    public function matches()
+    {
+        return $this->hasMany(Matches::class);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

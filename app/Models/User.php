@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'status',
         'password',
     ];
 
@@ -41,4 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function leagues()
+    {
+        return $this->hasMany(League::class, 'created_by');
+    }
+
+    public function teams()
+    {
+        return $this->hasMany(Team::class, 'created_by');
+    }
+
+    public function matches()
+    {
+        return $this->hasMany(Matches::class, 'created_by');
+    }
 }

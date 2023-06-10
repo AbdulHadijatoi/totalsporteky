@@ -20,20 +20,29 @@
           <th>League Name</th>
           <th>Home team</th>
           <th>Away Team</th>
+          <th>Date</th>
           <th>Time</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody class="table-border-bottom-0">
-        @foreach ($allleagues as $key=> $item)
+        @foreach ($matches as $key=> $item)
         <tr>
           <td>{{ $item->id }}</td>
-          <td>{{ $item->league->name }}</td>
-          <td>{{ $item->home_team }}
+          <td>{{ $item->league->name??'-' }}</td>
+          <td>{{ $item->home_team??'-' }}
           </td>
-          <td>{{ $item->away_team }}</td>
-          <td>{{ $item->start_time }}</td>
-          <td>{{ $item->start_time }}</td>
+          <td>{{ $item->away_team??'-' }}</td>
+          <td>{{ $item->date_of_match??'-' }}</td>
+          <td>{{ $item->start_time??'-' }}</td>
+          <td>
+            @if($item->status == 1)
+              <span class="badge bg-label-success">Active</span>
+            @else
+              <span class="badge bg-label-danger">Inactive</span>
+            @endif
+          </td>
 
           <td>
             <div class="dropdown">
